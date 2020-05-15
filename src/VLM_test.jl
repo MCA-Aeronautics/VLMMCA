@@ -3,10 +3,14 @@
 # To include this file:
 # include("Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod/src/VLM_test.jl)
 
+# Getting the packages ready
 Pkg.add(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
 Pkg.add("PyPlot")
 using VortexLatticeMethod
 using PyPlot
+
+# Getting the VLM() module
+import VortexLatticeMethod.VLM
 
 include("generatePanels.jl")
 include("plotPanels.jl")
@@ -28,7 +32,7 @@ thirdCoordinateTail  = [0.700, 0.500, 0.000].*scale + offset
 fourthCoordinateTail = [0.200, 0.000, 0.000].*scale + offset
 
 numPanelsSpan = 20
-numPanelsChord = 10
+numPanelsChord = 1
 wingGeometry = generatePanels(firstCoordinate, secondCoordinate, thirdCoordinate, fourthCoordinate, numPanelsSpan,numPanelsChord)
 #tailGeometry = generatePanels(firstCoordinateTail, secondCoordinateTail, thirdCoordinateTail, fourthCoordinateTail, numPanelsSpan)
 #geometry = cat(dims = 1, wingGeometry,tailGeometry)
@@ -40,7 +44,7 @@ angleOfAttack = alpha*pi/180
 sideslipAngle = 0 # Degrees
 sideslipAngle = sideslipAngle*pi/180
 
-CL, CD, cl, cd, CLSpanLocations = VortexLatticeMethod.VLM(wingGeometry,angleOfAttack,sideslipAngle);
+CL, CD, clift, cdrag, CLSpanLocations = VLM(wingGeometry,angleOfAttack,sideslipAngle);
 
 println("CL = ",CL)
 println("CD = ",CD)
@@ -49,7 +53,7 @@ println("CD = ",CD)
 # scatter(CLSpanLocations,cl,marker = ".")
 
 figure()
-plotLiftDistribution(wingGeometry,cl)
+plotLiftDistribution(wingGeometry,clift)
 
 # figure()
 # plotInducedDragDistribution(wingGeometry,cd)
