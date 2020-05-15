@@ -1,0 +1,4 @@
+name = "VortexLatticeMethod"
+uuid = "8baf1d39-669d-4b9f-a3f4-ec4809193160"
+authors = ["Mark C. Anderson <anderson.mark.az@gmail.com>"]
+version = "0.1.0"
