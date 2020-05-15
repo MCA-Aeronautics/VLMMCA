@@ -1,14 +1,11 @@
 # Purpose: test the VLM code and make sure it's working
 
 # To include this file:
-# include("Box/FLOW Lab/Modules MCA/VortexLatticeMethod/src/VLM_test.jl")
+# include("Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod/src/VLM_test.jl)
 
-using Pkg; Pkg.add("Revise"); using Revise;
-Pkg.develop(PackageSpec(path = "/Users/markanderson/Box/FLOW Lab/Modules MCA/VortexLatticeMethod"))
-import VortexLatticeMethod.VLM
-
-using Pkg
+Pkg.add(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
 Pkg.add("PyPlot")
+using VortexLatticeMethod
 using PyPlot
 
 include("generatePanels.jl")
@@ -43,7 +40,7 @@ angleOfAttack = alpha*pi/180
 sideslipAngle = 0 # Degrees
 sideslipAngle = sideslipAngle*pi/180
 
-CL, CD, cl, cd, CLSpanLocations = VLM(wingGeometry,angleOfAttack,sideslipAngle);
+CL, CD, cl, cd, CLSpanLocations = VortexLatticeMethod.VLM(wingGeometry,angleOfAttack,sideslipAngle);
 
 println("CL = ",CL)
 println("CD = ",CD)
