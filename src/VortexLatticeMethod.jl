@@ -33,9 +33,7 @@ module VortexLatticeMethod
     include("VelocityFilament.jl")
 
     function VLM(panels,
-                 angleOfAttack,
-                 sideslipAngle = 0,
-                 freestream = ones(length(panels[:,1])),
+                 freestream,
                  density = 1.225)
 
         println("Here!")
@@ -46,7 +44,7 @@ module VortexLatticeMethod
         # Defining the b column vector
         b = zeros(length(unitNormals[:,1]))
         for i = 1:length(b)
-            u = freestream[i].*[cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
+            u = freestream[i,:]
             n = [unitNormals[i,1],unitNormals[i,2],unitNormals[i,3]]
             b[i] = -dot(u,n)
         end

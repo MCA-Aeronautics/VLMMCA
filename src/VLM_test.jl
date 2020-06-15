@@ -4,8 +4,8 @@
 # include("Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod/src/VLM_test.jl)
 
 # Getting the packages ready
-Pkg.add(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
-#Pkg.add(PackageSpec(path="../VortexLatticeMethod"))
+revise()
+Pkg.develop(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
 Pkg.add("PyPlot")
 using VortexLatticeMethod
 using PyPlot
@@ -33,7 +33,8 @@ thirdCoordinateTail  = [0.700, 0.500, 0.000].*scale + offset
 fourthCoordinateTail = [0.200, 0.000, 0.000].*scale + offset
 
 numPanelsSpan = 20
-numPanelsChord = 1
+numPanelsChord = 10
+numPanels = numPanelsSpan*numPanelsChord*2
 wingGeometry = generatePanels(firstCoordinate, secondCoordinate, thirdCoordinate, fourthCoordinate, numPanelsSpan,numPanelsChord)
 #tailGeometry = generatePanels(firstCoordinateTail, secondCoordinateTail, thirdCoordinateTail, fourthCoordinateTail, numPanelsSpan)
 #geometry = cat(dims = 1, wingGeometry,tailGeometry)
@@ -45,10 +46,15 @@ angleOfAttack = alpha*pi/180
 sideslipAngle = 0 # Degrees
 sideslipAngle = sideslipAngle*pi/180
 
-CL, CD, clift, cdrag, CLSpanLocations = VLM(wingGeometry,angleOfAttack,sideslipAngle);
+freestream = zeros(numPanels,3)
+for i = 1:numPanels
+    freestream[i,:] = 1 .* [cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
+end
+
+CL, CD, clift, cdrag, CLSpanLocations = VLM(wingGeometry,freestream);
 
 println("CL = ",CL)
-println("CD = ",CD)
+println("CD = ",CD / numPanelsChord) # FIXME: This is a hack to approximate the correct value
 
 # figure()
 # scatter(CLSpanLocations,cl,marker = ".")

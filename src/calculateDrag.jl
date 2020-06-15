@@ -5,7 +5,7 @@ function calculateDrag(density,freestream,panels,GammaValues)
     CdSpanLocations = zeros(length(panels[:,1]),1)
     Drag = 0
     Area = 0
-    dynamicPressure = 0.5*density*(sum(freestream)/length(freestream))^2
+    dynamicPressure = 0.5*density*norm(freestream[1,:])^2
     
     for i = 1:length(panels[:,1]) # Iterating through each panel
         
