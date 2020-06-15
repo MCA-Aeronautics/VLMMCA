@@ -33,7 +33,7 @@ thirdCoordinateTail  = [0.700, 0.500, 0.000].*scale + offset
 fourthCoordinateTail = [0.200, 0.000, 0.000].*scale + offset
 
 numPanelsSpan = 20
-numPanelsChord = 1
+numPanelsChord = 10
 wingGeometry = generatePanels(firstCoordinate, secondCoordinate, thirdCoordinate, fourthCoordinate, numPanelsSpan,numPanelsChord)
 #tailGeometry = generatePanels(firstCoordinateTail, secondCoordinateTail, thirdCoordinateTail, fourthCoordinateTail, numPanelsSpan)
 #geometry = cat(dims = 1, wingGeometry,tailGeometry)
@@ -53,8 +53,8 @@ println("CD = ",CD)
 # figure()
 # scatter(CLSpanLocations,cl,marker = ".")
 
-figure()
-plotLiftDistribution(wingGeometry,clift)
+#figure()
+#plotLiftDistribution(wingGeometry,clift)
 
 # figure()
 # plotInducedDragDistribution(wingGeometry,cd)

@@ -11,7 +11,7 @@ function calculateInducedDrag(density,freestream,panels,GammaValues,CLn)
     inducedVelocity = zeros(length(panels[:,1])); # Will become our induced velocity at each panel control point
     inducedAlpha = zeros(length(panels[:,1])); # Will store induced Angle of Attack Information
     boundVortexCenters = zeros(length(panels[:,1]),3); # Will store the center of each bound vortex
-    dynamicPressure = 0.5*density*(sum(freestream)/length(freestream))^2;
+    dynamicPressure = 0.5*density*norm(freestream[1,:])^2;
     
     ##############################
     # Center of the bound vortex

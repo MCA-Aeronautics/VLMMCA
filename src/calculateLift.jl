@@ -9,16 +9,16 @@ function calculateLift(density,freestream,panels,GammaValues)
     Cl = zeros(length(panels[:,1])); # Will become our distribution of lift coefficient per panel, ClSpanLocations = zeros(length(panels[:,1])); # Will become our panel center locations
     ClSpanLocations = zeros(length(panels[:,1]))
     Area = 0; # Initial planform area assumed to be zero. We'll fix that later
-    
+
     for i = 1:length(panels[:,1])
        
         deltaY = abs(panels[i,2] - panels[i,5])
         
-        Lift = Lift + density*freestream[i]*GammaValues[i]*deltaY;
+        Lift = Lift + density*norm(freestream[i,:])*GammaValues[i]*deltaY;
         
     end
     
-    dynamicPressure = 0.5*density*(sum(freestream)/length(freestream))^2
+    dynamicPressure = 0.5*density*norm(freestream[1,:])^2 # FIXME: Make more general. It only uses one panel now
     # We had to take the average freestream velocity so that dynamic pressure would be a scalar
     
     # Finding the total planform area
