@@ -5,6 +5,7 @@
 
 # Getting the packages ready
 Pkg.add(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
+#Pkg.add(PackageSpec(path="../VortexLatticeMethod"))
 Pkg.add("PyPlot")
 using VortexLatticeMethod
 using PyPlot
