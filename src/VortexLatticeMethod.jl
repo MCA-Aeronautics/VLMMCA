@@ -38,9 +38,7 @@ module VortexLatticeMethod
                  freestream = zeros(length(panels[:,3])),
                  density = 1.225)
 
-        freestream = 1.*[cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
-
-        println("Here!")
+        freestream = 1 .* [cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
 
         # Preparing the AIC matrix
         AIC,unitNormals = createAIC(panels,"Horseshoe Lattice")

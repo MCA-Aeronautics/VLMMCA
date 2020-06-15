@@ -4,7 +4,8 @@
 # include("Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod/src/VLM_test.jl)
 
 # Getting the packages ready
-Pkg.add(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
+revise()
+Pkg.develop(PackageSpec(path="/Users/markanderson/Box/FLOW-MCA/FLOW-Code/Repositories/personal-projects/VortexLatticeMethod"))
 Pkg.add("PyPlot")
 using VortexLatticeMethod
 using PyPlot
