@@ -36,8 +36,6 @@ module VortexLatticeMethod
                  freestream,
                  density = 1.225)
 
-        println("Here!")
-
         # Preparing the AIC matrix
         AIC,unitNormals = createAIC(panels,"Horseshoe Lattice")
 
