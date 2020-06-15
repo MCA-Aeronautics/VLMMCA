@@ -34,6 +34,7 @@ fourthCoordinateTail = [0.200, 0.000, 0.000].*scale + offset
 
 numPanelsSpan = 20
 numPanelsChord = 10
+numPanels = numPanelsSpan*numPanelsChord*2
 wingGeometry = generatePanels(firstCoordinate, secondCoordinate, thirdCoordinate, fourthCoordinate, numPanelsSpan,numPanelsChord)
 #tailGeometry = generatePanels(firstCoordinateTail, secondCoordinateTail, thirdCoordinateTail, fourthCoordinateTail, numPanelsSpan)
 #geometry = cat(dims = 1, wingGeometry,tailGeometry)
@@ -45,16 +46,21 @@ angleOfAttack = alpha*pi/180
 sideslipAngle = 0 # Degrees
 sideslipAngle = sideslipAngle*pi/180
 
-CL, CD, clift, cdrag, CLSpanLocations = VLM(wingGeometry,angleOfAttack,sideslipAngle);
+freestream = zeros(numPanels,3)
+for i = 1:numPanels
+    freestream[i,:] = 1 .* [cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
+end
+
+CL, CD, clift, cdrag, CLSpanLocations = VLM(wingGeometry,freestream);
 
 println("CL = ",CL)
-println("CD = ",CD)
+println("CD = ",CD / numPanelsChord) # FIXME: This is a hack to approximate the correct value
 
 # figure()
 # scatter(CLSpanLocations,cl,marker = ".")
 
-#figure()
-#plotLiftDistribution(wingGeometry,clift)
+figure()
+plotLiftDistribution(wingGeometry,clift)
 
 # figure()
 # plotInducedDragDistribution(wingGeometry,cd)
