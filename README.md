@@ -6,6 +6,15 @@ A Vortex Lattice Method solver works by:
 3. Applying a flow-tangency boundary condition
 4. Solving a linear system for the vortex strengths needed to maintain the boundary condition on each panel
 
+# How to run
+1. Download the repository
+2. Navigate in the terminal to the repository folder
+3. For an example case, type:
+
+<pre><code>
+include("src/VLM_Test.jl")
+</code></pre>
+
 # Useful Functions
 
 ## VLM()
