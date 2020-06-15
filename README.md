@@ -8,12 +8,14 @@ A Vortex Lattice Method solver works by:
 
 # How to run
 1. Download the repository
-2. Navigate in the terminal to the repository folder
+2. The functions are now available for you to use
 3. For an example case, type:
 
 <pre><code>
 include("src/VLM_Test.jl")
 </code></pre>
+
+4. Feel free to tinker with the VLM_Test.jl file to learn about the program.
 
 # Useful Functions
 
