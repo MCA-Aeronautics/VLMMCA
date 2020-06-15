@@ -35,8 +35,12 @@ module VortexLatticeMethod
     function VLM(panels,
                  angleOfAttack,
                  sideslipAngle = 0,
-                 freestream = ones(length(panels[:,1])),
+                 freestream = zeros(length(panels[:,3])),
                  density = 1.225)
+
+        freestream = 1.*[cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
+
+        println("Here!")
 
         # Preparing the AIC matrix
         AIC,unitNormals = createAIC(panels,"Horseshoe Lattice")
@@ -44,7 +48,8 @@ module VortexLatticeMethod
         # Defining the b column vector
         b = zeros(length(unitNormals[:,1]))
         for i = 1:length(b)
-            u = freestream[i].*[cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
+            #u = freestream[i].*[cos(angleOfAttack)*cos(sideslipAngle),-sin(sideslipAngle),sin(angleOfAttack)*cos(sideslipAngle)]
+            u = freestream
             n = [unitNormals[i,1],unitNormals[i,2],unitNormals[i,3]]
             b[i] = -dot(u,n)
         end
