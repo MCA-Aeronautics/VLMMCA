@@ -19,12 +19,12 @@ Inputs:
 - density = ambient fluid density, defaulting to 1.225 kg/m^3
 
 Outputs:
-CL = total lift coefficient
-CDi_near = total induced drag coefficient as calculated in the near field
-cl = sectional lift coefficient
-cd_near = sectional induced drag coefficient as calculated in the near field
-CLSpanLocations = the y-coordinate of the center of each panel
-GammaValues = the circulation value at each panel
+- CL = total lift coefficient
+- CDi_near = total induced drag coefficient as calculated in the near field
+- cl = sectional lift coefficient
+- cd_near = sectional induced drag coefficient as calculated in the near field
+- CLSpanLocations = the y-coordinate of the center of each panel
+- GammaValues = the circulation value at each panel
 
 ## generatePanels()
 <pre><code>
@@ -52,9 +52,9 @@ Inputs:
 - GammaValues = an Nx1 array that contains the local circulation values at each panel
 
 Outputs:
-CL = total lift coefficient
-cl = sectional lift coefficient
-CLSpanLocations = the y-coordinate of the center of each panel
+- CL = total lift coefficient
+- cl = sectional lift coefficient
+- CLSpanLocations = the y-coordinate of the center of each panel
 
 ## calculateInducedDrag()
 <pre><code>
@@ -69,10 +69,10 @@ Inputs:
 - cl = an Nx1 array that contains the local (sectional) lift coefficient for each panel
 
 Outpus: 
-CDi_near = the total near-field induced drag coefficient
-cd_near = the near-field induced drag coefficient at each panel
-Cd_nearSpanLocations = the y-coordinates for the center of each panel
-inducedVelocity = the induced velocities at each panel
+- CDi_near = the total near-field induced drag coefficient
+- cd_near = the near-field induced drag coefficient at each panel
+- Cd_nearSpanLocations = the y-coordinates for the center of each panel
+- inducedVelocity = the induced velocities at each panel
 
 ## calculateDrag()
 <pre><code>
@@ -86,6 +86,6 @@ Inputs:
 - GammaValues = an Nx1 array that contains the local circulation values at each panel
 
 Outputs:
-CDi_far = the total far-field induced drag coefficient calculated by using a Trefftz plane analysis
-cd_far = the far-field induced drag coefficient at each panel (little physical relevance)
-Cd_farSpanLocation = the y-coordinates for theh center of each panel
+- CDi_far = the total far-field induced drag coefficient calculated by using a Trefftz plane analysis
+- cd_far = the far-field induced drag coefficient at each panel (little physical relevance)
+- Cd_farSpanLocation = the y-coordinates for theh center of each panel
