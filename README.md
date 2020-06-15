@@ -9,6 +9,9 @@ A Vortex Lattice Method solver works by:
 # Useful Functions
 
 ## VLM()
+
+This is the core solver and is all you need to run the vortex lattice method. The rest are supporting functions.
+
 <pre><code>
 CL, CDi_near, cl, cd_near, CLSpanLocations, GammaValues = VLM(panels,freestream,density = 1.225)
 </code></pre>
