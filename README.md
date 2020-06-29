@@ -18,6 +18,8 @@ A Vortex Lattice Method solver works by:
 include("src/VLM_Test.jl")
 </code></pre>
 
+Note: You must be in the repository directory, and above src/. In other words, you must be in the same directory as Project.toml to run the above code.
+
 4. Feel free to tinker with the VLM_Test.jl file to learn about the program.
 
 # Useful Functions
