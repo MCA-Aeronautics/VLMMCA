@@ -7,16 +7,20 @@
 revise()
 Pkg.develop(PackageSpec(path=pwd()))
 Pkg.add("PyPlot")
-using VortexLatticeMethod
+using VLMMCA
 using PyPlot
 
 # Getting the VLM() module
-import VortexLatticeMethod.VLM
+import VLMMCA.VLM
+import VLMMCA.generatePanels
+import VLMMCA.plotPanels
+import VLMMCA.plotLiftDistribution
+import VLMMCA.plotInducedDragDistribution
 
-include("generatePanels.jl")
-include("plotPanels.jl")
-include("plotLiftDistribution.jl")
-include("plotInducedDragDistribution.jl")
+# include("generatePanels.jl")
+# include("plotPanels.jl")
+# include("plotLiftDistribution.jl")
+# include("plotInducedDragDistribution.jl")
 
 # Bertin's Wing Geometry
 firstCoordinate  = [0.000, 0.000, 0.000];
