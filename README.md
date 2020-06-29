@@ -1,4 +1,7 @@
 # VortexLatticeMethod
+
+This code takes wing geometries and freestream flow to calculate the aerodynamic forces on a wing.
+
 A Vortex Lattice Method solver works by:
 
 1. Discretizing a surface into flat four-sided panels
