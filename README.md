@@ -1,4 +1,4 @@
-# VortexLatticeMethod
+# VLMMCA (Vortex Lattice Method - MCA)
 
 This code takes wing geometries and freestream flow to calculate the aerodynamic forces on a wing.
 
