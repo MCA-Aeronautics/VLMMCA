@@ -531,9 +531,13 @@ module VLMMCA
         # Calclulating the center of each bound vortex
         for i = 1:length(panels[:,1])
     
-            deltaX = panels[i,4] - panels[i,1]
-            deltaY = panels[i,5] - panels[i,2]
-            deltaZ = panels[i,6] - panels[i,3]
+            # deltaX = abs(panels[i,4] - panels[i,1])
+            # deltaY = abs(panels[i,5] - panels[i,2])
+            # deltaZ = abs(panels[i,6] - panels[i,3])
+
+            deltaX = abs(X2n[i] - X1n[i])
+            deltaY = abs(Y2n[i] - Y1n[i])
+            deltaZ = abs(Z2n[i] - Z1n[i])
     
             boundVortexCenters[i,1:3] = [X1n[i] + deltaX/2, Y1n[i] + deltaY/2, Z1n[i] + deltaZ/2]
     
