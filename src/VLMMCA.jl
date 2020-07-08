@@ -542,7 +542,7 @@ module VLMMCA
             boundVortexCenters[i,1:3] = [X1n[i] + deltaX/2, Y1n[i] + deltaY/2, Z1n[i] + deltaZ/2]
     
         end
-    
+
         # figure()
         # plotPanels(panels)
         # scatter3D(boundVortexCenters[:,1],boundVortexCenters[:,2],boundVortexCenters[:,3],color = "black")
