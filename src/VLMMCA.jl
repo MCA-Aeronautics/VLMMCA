@@ -468,8 +468,8 @@ module VLMMCA
         # projected into the x-y plane as viewed from above the wing
         Lift = 0; # Initial lift assumed to be zero, then we'll add the differential lift given by each panel
         CL = 0; # Initial lift coefficient assumed to be zero. We'll fix that later
-        Cl = zeros(length(panels[:,1])); # Will become our distribution of lift coefficient per panel, ClSpanLocations = zeros(length(panels[:,1])); # Will become our panel center locations
-        ClSpanLocations = zeros(length(panels[:,1]))
+        cl = zeros(length(panels[:,1])); # Will become our distribution of lift coefficient per panel, ClSpanLocations = zeros(length(panels[:,1])); # Will become our panel center locations
+        clSpanLocations = zeros(length(panels[:,1]))
         Area = 0; # Initial planform area assumed to be zero. We'll fix that later
 
         for i = 1:length(panels[:,1])
@@ -492,15 +492,25 @@ module VLMMCA
             deltaY = abs(panels[i,2] - panels[i,5])
             deltaX = abs(panels[i,1] - panels[i,10])
             panelFrontLength = sqrt((panels[i,1] - panels[i,4])^2 + (panels[i,2] - panels[i,5])^2)
-            
-            incrementalArea = deltaX * deltaY
+
+            # Find all four sides. We will define them as vectors traveling clockwise around the panel when viewed from above.
+            a = [panels[i,4] - panels[i,1], panels[i,5] - panels[i,2], panels[i,6] - panels[i,3]]
+            b = [panels[i,7] - panels[i,4], panels[i,8] - panels[i,5], panels[i,9] - panels[i,6]]
+            c = [panels[i,10] - panels[i,7], panels[i,11] - panels[i,8], panels[i,12] - panels[i,9]]
+            d = [panels[i,1] - panels[i,10], panels[i,2] - panels[i,11], panels[i,3] - panels[i,12]]
+
+            # Find the angles between opposite corners of the quadrilateral
+            theta_a_b = acos(dot(a,b) / (norm(a)*norm(b)))
+            theta_c_d = acos(dot(c,d) / (norm(c)*norm(d)))
+
+            incrementalArea = 0.5 * norm(a) * norm(b) * sin(theta_a_b) + 0.5 * norm(c) * norm(d) * sin(theta_c_d)
             
             Area = Area + incrementalArea
             
             # See eqn 7.51 in Bertin's book
-            Cl[i] = (density.*freestream[i]*GammaValues[i]*deltaY)/(dynamicPressure * incrementalArea) # if unit span is only in y
+            cl[i] = (density.*freestream[i]*GammaValues[i]*deltaY)/(dynamicPressure * incrementalArea) # if unit span is only in y
             #Cl[i] = (freestream[i]*GammaValues[i]*deltaY)/(dynamicPressure * deltaX * panelFrontLength) # if unit span is along the leading edge
-            ClSpanLocations[i] = panels[i,2] + deltaY/2
+            clSpanLocations[i] = panels[i,2] + deltaY/2
 
         end
         
@@ -508,7 +518,7 @@ module VLMMCA
         # simple formula with less rounding error
         CL = Lift/(dynamicPressure * Area)
         
-        return CL, Cl, ClSpanLocations;
+        return CL, cl, clSpanLocations;
     end
 
     function calculateInducedVelocity(panels,GammaValues,location)
