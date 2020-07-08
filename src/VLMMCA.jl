@@ -535,17 +535,17 @@ module VLMMCA
             # deltaY = abs(panels[i,5] - panels[i,2])
             # deltaZ = abs(panels[i,6] - panels[i,3])
 
-            deltaX = abs(X2n[i] - X1n[i])
-            deltaY = abs(Y2n[i] - Y1n[i])
-            deltaZ = abs(Z2n[i] - Z1n[i])
+            deltaX = X2n[i] - X1n[i]
+            deltaY = Y2n[i] - Y1n[i]
+            deltaZ = Z2n[i] - Z1n[i]
     
             boundVortexCenters[i,1:3] = [X1n[i] + deltaX/2, Y1n[i] + deltaY/2, Z1n[i] + deltaZ/2]
     
         end
     
-        #figure()
-        #plotPanels(panels)
-        #scatter3D(boundVortexCenters[:,1],boundVortexCenters[:,2],boundVortexCenters[:,3],color = "black")
+        # figure()
+        # plotPanels(panels)
+        # scatter3D(boundVortexCenters[:,1],boundVortexCenters[:,2],boundVortexCenters[:,3],color = "black")
     
         ###############################
         # At the center of the bound vortex
@@ -556,8 +556,8 @@ module VLMMCA
     
                 for j = 1:length(panels[:,1]) # Each horseshoe vortex associated with a panel
                 
-                    r1 = currentPoint - [X1n[j],Y1n[j],Zm[j]];
-                    r2 = currentPoint - [X2n[j],Y2n[j],Zm[j]];
+                    r1 = currentPoint - [X1n[j],Y1n[j],Z1n[j]];
+                    r2 = currentPoint - [X2n[j],Y2n[j],Z2n[j]];
     
                     if j != i
                         inducedVelocity[i] = inducedVelocity[i] + Velocity(r1,r2,GammaValues[j],"Horseshoe")[3]; # Only uses the z-component of the induced velocity
