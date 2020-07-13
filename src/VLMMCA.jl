@@ -476,8 +476,8 @@ module VLMMCA
         
             deltaY = abs(panels[i,2] - panels[i,5])
             
-            Lift = Lift + density*norm(freestream[i,:])*GammaValues[i]*deltaY;
-            #Lift = Lift + density*norm(freestream[1,:])*GammaValues[i]*deltaY;
+            #Lift = Lift + density*norm(freestream[i,:])*GammaValues[i]*deltaY;
+            Lift = Lift + density*norm(freestream[1,:])*GammaValues[i]*deltaY;
             
         end
         
@@ -509,7 +509,7 @@ module VLMMCA
             Area = Area + incrementalArea
             
             # See eqn 7.51 in Bertin's book
-            cl[i] = (density.*norm(freestream[i,:])*GammaValues[i]*deltaY)/(dynamicPressure * incrementalArea) # if unit span is only in y
+            cl[i] = (density.*norm(freestream[1,:])*GammaValues[i]*deltaY)/(dynamicPressure * incrementalArea) # if unit span is only in y
             #Cl[i] = (freestream[i]*GammaValues[i]*deltaY)/(dynamicPressure * deltaX * panelFrontLength) # if unit span is along the leading edge
             clSpanLocations[i] = panels[i,2] + deltaY/2
 
