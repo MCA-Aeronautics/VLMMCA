@@ -487,9 +487,6 @@ module VLMMCA
         # Finding the total planform area
         for i = 1:length(panels[:,1])
             
-            # The area of a parallelogram is equal to its base times its height
-            # We will take each deltaY to be our height and use deltaX for our base
-            
             deltaY = abs(panels[i,2] - panels[i,5])
             deltaX = abs(panels[i,1] - panels[i,10])
             panelFrontLength = sqrt((panels[i,1] - panels[i,4])^2 + (panels[i,2] - panels[i,5])^2)
@@ -511,8 +508,14 @@ module VLMMCA
             #dynamicPressure = 0.5*density*norm(freestream[i,:])^2
 
             # See eqn 7.51 in Bertin's book
-            cl[i] = (density.*norm(freestream[1,:])*GammaValues[i]*deltaY)/(dynamicPressure * incrementalArea) # if unit span is only in y
+            #cl[i] = (density.*norm(freestream[1,:])*GammaValues[i]*deltaY)/(dynamicPressure * incrementalArea) # if unit span is only in y
+            
+            # When you define the local lift coefficient as cl = L / (q * S) and replace L with Kutta-Joukowski,
+            # you can simplify to the following expression
+            cl[i] = 2*GammaValues[i]*deltaY / (norm(freestream[1,:]) * incrementalArea)
+
             #Cl[i] = (freestream[i]*GammaValues[i]*deltaY)/(dynamicPressure * deltaX * panelFrontLength) # if unit span is along the leading edge
+            
             clSpanLocations[i] = panels[i,2] + deltaY/2
 
         end
