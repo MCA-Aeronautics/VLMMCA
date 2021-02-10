@@ -17,8 +17,8 @@
 module VLMMCA
 
     using Pkg
-    Pkg.add("LinearAlgebra")
-    Pkg.add("PyPlot")
+    #Pkg.add("LinearAlgebra")
+    #Pkg.add("PyPlot")
     using LinearAlgebra
     using PyPlot
 
